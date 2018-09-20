@@ -1,4 +1,4 @@
-package io.pravega.loadTester;
+package io.pravega.loadGenerator;
 
 import lombok.extern.slf4j.Slf4j;
 

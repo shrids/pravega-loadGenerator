@@ -18,12 +18,12 @@ if (file("src/main/java").isDirectory()) {
 }
 
 apply plugin: 'application'
-applicationName = "pravega-loadTester"
-mainClassName = "io.pravega.loadTester.Main"
+applicationName = "pravega-loadGenerator"
+mainClassName = "io.pravega.loadGenerator.Main"
 
 applicationDefaultJvmArgs = ["-server", "-Xms512m", "-XX:+HeapDumpOnOutOfMemoryError",
                              "-Dlog.dir=PRAVEGA_APP_HOME/logs",
-                             "-Dlog.name=loadTester",
+                             "-Dlog.name=loadGenerator",
                              "-Dpravega.configurationFile=PRAVEGA_APP_HOME/conf/config.properties",
                              "-Dlogback.configurationFile=PRAVEGA_APP_HOME/conf/logback.xml"]
 
