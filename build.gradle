@@ -24,8 +24,7 @@ mainClassName = "io.pravega.loadGenerator.Main"
 applicationDefaultJvmArgs = ["-server", "-Xms512m", "-XX:+HeapDumpOnOutOfMemoryError",
                              "-Dlog.dir=PRAVEGA_APP_HOME/logs",
                              "-Dlog.name=loadGenerator",
-                             "-Dpravega.configurationFile=PRAVEGA_APP_HOME/conf/config.properties",
-                             "-Dlogback.configurationFile=PRAVEGA_APP_HOME/conf/logback.xml"]
+                             "-Dlogback.configurationFile=logback.xml"]
 
 dependencies {
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
