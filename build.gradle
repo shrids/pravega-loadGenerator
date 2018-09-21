@@ -20,15 +20,23 @@ if (file("src/main/java").isDirectory()) {
 apply plugin: 'application'
 applicationName = "pravega-loadGenerator"
 mainClassName = "io.pravega.loadGenerator.Main"
-
+applicationDistribution.from('src/conf') {
+    into "conf"
+}
 applicationDefaultJvmArgs = ["-server", "-Xms512m", "-XX:+HeapDumpOnOutOfMemoryError",
-                             "-Dlog.dir=PRAVEGA_APP_HOME/logs",
+                             "-Dlog.dir=APP_HOME/logs",
                              "-Dlog.name=loadGenerator",
-                             "-Dlogback.configurationFile=logback.xml"]
+                             "-Dlogback.configurationFile=APP_HOME/conf/logback.xml"]
 
 dependencies {
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    // https://mvnrepository.com/artifact/io.pravega/pravega-client
+    compile group: 'io.pravega', name: 'pravega-client', version: '0.3.1'
+
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

@@ -1,0 +1,18 @@
+{
+  "default.scope": "s",
+  "default.stream.create": true,
+  "test.configs": [
+    {
+      "name": "basicLongevityTest",
+      "writer.count": 1,
+      "reader.count": 1,
+      "writer.maxwritespersecond": 2,
+      "writer.payload.sizeinbytes": 100,
+      "writer.keycount": 2,
+      "assertions": {
+        "is.running": true,
+        "is.in.sequence": true
+      }
+    }
+  ]
+}
