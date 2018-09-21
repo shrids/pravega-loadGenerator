@@ -3,14 +3,12 @@ package io.pravega.loadGenerator.service;
 import io.pravega.client.stream.ScalingPolicy;
 import io.pravega.client.stream.StreamConfiguration;
 import io.pravega.loadGenerator.config.LoadGeneratorConfig;
-import org.junit.Test;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 public class LoadGeneratorServiceTest {
 
-        @Test
     public void start() throws URISyntaxException {
 
         LoadGeneratorService service = new LoadGeneratorService(getConfig(), new URI("tcp://127.0.0.1:9090"));

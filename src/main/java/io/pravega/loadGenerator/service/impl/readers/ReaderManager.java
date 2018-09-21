@@ -39,9 +39,9 @@ public class ReaderManager implements AutoCloseable {
             return Reader.builder()
                          .config(config)
                          .executorService(executor)
-                         .readerId("Reader1-" + i)
+                         .readerId("Reader-" + i)
                          .testState(this.state)
-                         .pravegaReader(clientFactory.createReader("reader1-" + i, readerGroupName, SERIALIZER, readerConfig))
+                         .pravegaReader(clientFactory.createReader("reader-" + i, readerGroupName, SERIALIZER, readerConfig))
                          .build();
         }).collect(Collectors.toList());
 
