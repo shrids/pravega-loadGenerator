@@ -1,4 +1,4 @@
-//package io.pravega.loadGenerator.impl;
+//package io.pravega.loadGenerator.service.impl;
 //
 //import com.emc.nautilus.hulk.model.ReaderInfo;
 //import com.emc.nautilus.hulk.model.performance.ReaderGroupPerformance;

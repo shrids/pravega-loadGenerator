@@ -1,18 +1,25 @@
 {
-  "default.scope": "s",
   "default.stream.create": true,
-  "test.configs": [
-    {
-      "name": "basicLongevityTest",
-      "writer.count": 1,
-      "reader.count": 1,
-      "writer.maxwritespersecond": 2,
-      "writer.payload.sizeinbytes": 100,
-      "writer.keycount": 2,
-      "assertions": {
-        "is.running": true,
-        "is.in.sequence": true
+  "test.config": {
+    "name": "basicLongevityTest",
+    "stream": {
+      "scope": "basicScope",
+      "stream.name": "basic",
+      "scaling.policy": {
+        "scale.type": "FIXED_NUM_SEGMENTS",
+        "target.rate": 0,
+        "scale.factor": 0,
+        "min.num.segments": 2
       }
+    },
+    "writer.count": 1,
+    "reader.count": 1,
+    "writer.maxwritespersecond": 2,
+    "writer.payload.sizeinbytes": 100,
+    "writer.keycount": 2,
+    "assertions": {
+      "is.running": true,
+      "is.in.sequence": true
     }
-  ]
+  }
 }

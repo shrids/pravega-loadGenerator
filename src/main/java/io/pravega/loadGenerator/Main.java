@@ -1,6 +1,7 @@
 package io.pravega.loadGenerator;
 
 import io.pravega.loadGenerator.config.LoadGeneratorConfig;
+import io.pravega.loadGenerator.service.LoadGeneratorService;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.CommandLine;
@@ -11,6 +12,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import java.io.BufferedReader;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -41,6 +43,9 @@ public class Main {
         BufferedReader reader = Files.newBufferedReader(Paths.get(jsonConfigFile));
         LoadGeneratorConfig config = LoadGeneratorConfig.fromJson(reader);
         log.info("Start LoadGenerator for config :{}", config.toJson());
+
+        LoadGeneratorService service = new LoadGeneratorService(config, new URI(controllerUri));
+        service.start();
     }
 
     private static CommandLine parseCommandLineArgs(Options options, String[] args) throws ParseException {

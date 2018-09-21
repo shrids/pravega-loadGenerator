@@ -1,4 +1,4 @@
-package io.pravega.loadGenerator.impl;
+package io.pravega.loadGenerator.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;

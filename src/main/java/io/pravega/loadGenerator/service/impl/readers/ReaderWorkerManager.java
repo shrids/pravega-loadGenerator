@@ -1,4 +1,4 @@
-//package io.pravega.loadGenerator.impl.readers;
+//package io.pravega.loadGenerator.service.impl.readers;
 //
 //import com.emc.nautilus.hulk.messagebus.ExecutorMessageClient;
 //import com.emc.nautilus.hulk.model.PravegaTaskConfiguration;

@@ -1,6 +1,8 @@
 package io.pravega.loadGenerator.config;
 
 
+import io.pravega.client.stream.ScalingPolicy;
+import io.pravega.client.stream.StreamConfiguration;
 import io.pravega.loadGenerator.config.LoadGeneratorConfig.Assertions;
 import io.pravega.loadGenerator.config.LoadGeneratorConfig.TestConfig;
 import lombok.Cleanup;
@@ -21,8 +23,14 @@ public class LoadGeneratorConfigTest {
     @Test
     public void testSerialize() {
 
+        StreamConfiguration streamConfig = StreamConfiguration.builder()
+                                                              .streamName("basic")
+                                                              .scope("basicScope")
+                                                              .scalingPolicy(ScalingPolicy.fixed(2))
+                                                              .build();
         TestConfig testConfig = TestConfig.builder()
                                           .name("basicLongevityTest")
+                                          .stream(streamConfig)
                                           .readerCount(1)
                                           .writerCount(1)
                                           .writerMaxwritespersecond(2)
@@ -31,9 +39,8 @@ public class LoadGeneratorConfigTest {
                                           .assertions(Assertions.builder().isInSequence(true).isRunning(true).build())
                                           .build();
         LoadGeneratorConfig config = LoadGeneratorConfig.builder()
-                                                        .defaultScope("s")
                                                         .defaultStreamCreate(true)
-                                                        .testConfigs(Arrays.asList(testConfig))
+                                                        .testConfig(testConfig)
                                                         .build();
         String jsonString = config.toJson();
         log.info(jsonString);
@@ -45,7 +52,7 @@ public class LoadGeneratorConfigTest {
         @Cleanup
         BufferedReader reader = Files.newBufferedReader(Paths.get(ClassLoader.getSystemResource("config.json").toURI()));
         LoadGeneratorConfig config = LoadGeneratorConfig.fromJson(reader);
-        assertEquals("basicLongevityTest", config.getTestConfigs().get(0).getName());
+        assertEquals("basicLongevityTest", config.getTestConfig().getName());
     }
 
 }

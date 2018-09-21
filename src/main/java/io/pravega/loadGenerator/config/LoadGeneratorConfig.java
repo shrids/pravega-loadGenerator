@@ -19,16 +19,15 @@ public class LoadGeneratorConfig {
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DOTS).create();
 
-    private final String defaultScope;
     private final boolean defaultStreamCreate;
-    private final List<TestConfig> testConfigs;
+    private final TestConfig testConfig;
 
     @Builder
     @Data
     public static final class TestConfig {
         private final String name;
-        private final List<StreamConfiguration> streams;
-        private final int writerCount;
+        private final StreamConfiguration stream;
+        private final int writerCount; // writer count is per stream.
         private final int readerCount;
         // private final int durationInMins;
 

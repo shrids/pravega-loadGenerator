@@ -1,7 +1,7 @@
-//package io.pravega.loadGenerator.impl.readers;
+//package io.pravega.loadGenerator.service.impl.readers;
 //
 //import com.emc.nautilus.hulk.model.ReaderInfo;
-//import com.emc.nautilus.hulk.taskexecutor.workers.PravegaTestPayload;
+//import com.emc.nautilus.hulk.taskexecutor.workers.PayLoad;
 //import com.emc.nautilus.hulk.taskexecutor.workers.SequenceValidator;
 //import com.emc.nautilus.hulk.taskexecutor.workers.TaskPerformanceCollector;
 //import com.emc.nautilus.hulk.utils.PravegaNamingUtils;
@@ -27,11 +27,11 @@
 //public class PravegaReader {
 //    private static Logger LOG = LoggerFactory.getLogger(PravegaReader.class);
 //
-//    private final JavaSerializer<PravegaTestPayload> SERIALIZER = new JavaSerializer<>();
+//    private final JavaSerializer<PayLoad> SERIALIZER = new JavaSerializer<>();
 //
 //    private String readerId;
 //    private ClientFactory clientFactory;
-//    private EventStreamReader<PravegaTestPayload> eventStreamReader;
+//    private EventStreamReader<PayLoad> eventStreamReader;
 //
 //    private String stream;
 //
@@ -111,7 +111,7 @@
 //                if (readerSync.tryAcquire(0, TimeUnit.SECONDS)) {
 //                    try {
 //                        beforeRead();
-//                        EventRead<PravegaTestPayload> result = eventStreamReader.readNextEvent(readTimeout);
+//                        EventRead<PayLoad> result = eventStreamReader.readNextEvent(readTimeout);
 //                        lastPosition = result.getPosition();
 //                        afterRead(result.getEvent());
 //                    }
@@ -158,7 +158,7 @@
 //        stopped = true;
 //    }
 //
-//    public void afterRead(PravegaTestPayload payload) {
+//    public void afterRead(PayLoad payload) {
 //        if (performanceCollector != null && payload != null) {
 //            int sizeOfEvent = io.netty.buffer.Unpooled.wrappedBuffer(SERIALIZER.serialize(payload)).readableBytes();
 //            ReaderInfo snapshotInfo = new ReaderInfo(this.hashCode() + "",
@@ -191,7 +191,7 @@
 //        }
 //    }
 //
-//    private void validateTransactionState(PravegaTestPayload payload) {
+//    private void validateTransactionState(PayLoad payload) {
 //        if (payload.isFromAbortedTransaction()) {
 //            LOG.error("Got an aborted transaction's write (sender, sequence): {} {}",
 //                      payload.getSenderId(), payload.getSequenceNumber());
@@ -200,7 +200,7 @@
 //        }
 //    }
 //
-//    private void validateSequence(PravegaTestPayload payload) {
+//    private void validateSequence(PayLoad payload) {
 //        try {
 //            sequenceValidator.validate(payload.getSenderId(), payload.getSequenceNumber());
 //        }
