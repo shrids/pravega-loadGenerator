@@ -2,28 +2,23 @@ package io.pravega.loadGenerator.service.impl.writers;
 
 import io.pravega.client.stream.EventStreamWriter;
 import io.pravega.common.Exceptions;
+import io.pravega.loadGenerator.service.LoadGeneratorService.TestState;
 import io.pravega.loadGenerator.service.impl.PayLoad;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Slf4j
 @Builder
 public class Writer implements AutoCloseable {
 
     private final EventStreamWriter<PayLoad> writer;
-    private final WriterManager.TestState testState;
+    private final TestState testState;
     private final ExecutorService executorService;
     private final List<String> routingKeys;
     private final String writerId;
@@ -34,11 +29,11 @@ public class Writer implements AutoCloseable {
 
     private CompletableFuture<Void> startWriting() {
         return CompletableFuture.runAsync(() -> {
-           ;
+            ;
             long seqNumber = 0;
             while (!testState.stopWriteFlag.get()) {
                 try {
-                    String uniqueRoutingKey =  routingKeys.get(ThreadLocalRandom.current().nextInt(routingKeys.size()));
+                    String uniqueRoutingKey = routingKeys.get(ThreadLocalRandom.current().nextInt(routingKeys.size()));
                     Exceptions.handleInterrupted(() -> Thread.sleep(100));
 
                     // The content of events is generated following the pattern routingKey:seq_number, where

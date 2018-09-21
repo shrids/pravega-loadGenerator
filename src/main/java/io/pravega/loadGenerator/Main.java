@@ -45,6 +45,8 @@ public class Main {
         log.info("Start LoadGenerator for config :{}", config.toJson());
 
         LoadGeneratorService service = new LoadGeneratorService(config, new URI(controllerUri));
+        service.prepare();
+        log.info("Start the loadGenerator tool");
         service.start();
     }
 

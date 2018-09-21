@@ -8,14 +8,14 @@ import org.junit.Test;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import static org.junit.Assert.*;
-
 public class LoadGeneratorServiceTest {
 
-    @Test
+        @Test
     public void start() throws URISyntaxException {
-        //LoadGeneratorService service = new LoadGeneratorService(getConfig(), new URI("tcp://127.0.0.1:9090"));
-        //service.start();
+
+        LoadGeneratorService service = new LoadGeneratorService(getConfig(), new URI("tcp://127.0.0.1:9090"));
+        service.prepare();
+        service.start();
     }
 
     private LoadGeneratorConfig getConfig() {
